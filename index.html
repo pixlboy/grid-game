@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MeziApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Mezi Game</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="container" ng-cloak ng-controller="GameCtrl as game">
+        <section class="summary col-xs-12 col-md-4">
+            <div class="row col-xs-12">
+                <span>Lives left</span>
+                <h2>{{game.lives}}</h2>
+            </div>
+            <div class="row col-xs-12">
+                <span>Time Left : </span>
+                <h2>{{game.timeLeft}}</h2>
+            </div>
+            <div class="row col-xs-12">
+                <i>{{game.status}}</i>
+                <span class="bg-danger" ng-if="game.lives === 0 && game.timeLeft === 0">  GAME OVER :( </span>
+            </div>
+            <div class="row col-xs-12">
+                <input type="button" ng-hide="game.isHideStartBtn" ng-show="game.timeLeft === 0 && game.lives === 0" class="start-btn form-control btn btn-info" value="Start"
+                    ng-click="game.start()" />
+            </div>
+        </section>
+        <ul class="grid col-xs-12 col-md-4">
+            <li class="pull-left cell"
+                ng-repeat="(itemIdx, item) in game.items track by itemIdx"
+                ng-class="{'active' : !item}"
+                ng-click="game.removeCell(itemIdx)">
+                {{itemIdx + 1}}
+            </li>
+        </ul>
+	</div>
+    <!-- Angular Material Dependencies -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
